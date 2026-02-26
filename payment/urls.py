@@ -6,6 +6,7 @@ from .views.verify_payment import VerifyPayment
 urlpatterns = [
     path('make/', MakePayment.as_view(),name="make-payment"),
     path('verify/', VerifyPayment.as_view(),name="verify-payment"),
+    path('verify/', VerifyPayment.as_view(),name="verify-payment"),
 
     
 ]

@@ -7,6 +7,7 @@ class Event(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     ticket_rate = models.IntegerField(blank=False,null=False,default=0)
+    quantity = models.PositiveIntegerField(default=0)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):

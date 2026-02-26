@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'events',
     'tickets',
+    'payment',
 ]
 
 MIDDLEWARE = [

@@ -12,15 +12,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Event',
+            name='Payment',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, unique=True)),
-                ('date', models.DateTimeField()),
+                ('payment_status', models.CharField(choices=[('pending', 'Pending'), ('completed', 'Completed'), ('failed', 'Failed')], default='pending', max_length=20)),
+                ('payment_method', models.CharField(choices=[('upi', 'UPI'), ('inhand', 'In Hand')], default='inhand', max_length=20)),
+                ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('ticket_rate', models.IntegerField(default=0)),
-                ('quantity', models.PositiveIntegerField(default=0)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
             ],
         ),
     ]

@@ -6,8 +6,14 @@ from payment.models import Payment
 class Ticket(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="tickets")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="tickets")
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
 
-    ticket_code = models.CharField(max_length=50, unique=True)
+    payment = models.ForeignKey(
+        Payment,
+        on_delete=models.CASCADE,
+        null=True,          
+        blank=True
+    )
+
+    ticket_code = models.CharField(max_length=50, unique=True,default="XXX")
 
     created_at = models.DateTimeField(auto_now_add=True)

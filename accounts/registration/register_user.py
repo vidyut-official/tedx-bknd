@@ -40,7 +40,7 @@ def registrations_login(request):
                 status=401
             )
         refresh = RefreshToken.for_user(user)
-        refresh["role"] = user.role
+        refresh["role"] = user.user_role
         return JsonResponse(
             {
                 "access": str(refresh.access_token),

@@ -13,8 +13,8 @@ class EventListAPIView(APIView):
         events = (
             Event.objects
             .annotate(
-                tickets_sold=Coalesce(Count("ticket"), 0),
-                remaining_seats=F("quantity") - Coalesce(Count("ticket"), 0)
+                tickets_sold=Coalesce(Count("tickets"), 0),
+                remaining_seats=F("quantity") - Coalesce(Count("tickets"), 0)
             )
             .values(
                 "id",

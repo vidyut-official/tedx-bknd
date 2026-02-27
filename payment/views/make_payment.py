@@ -53,7 +53,7 @@ class MakePayment(APIView):
         # -------- Seat Availability Check --------
         sold_tickets = Ticket.objects.filter(event=event).count()
 
-        if sold_tickets + quantity > event.total_seats:
+        if sold_tickets + quantity > event.quantity:
             return Response(
                 {"error": "Not enough seats available"},
                 status=status.HTTP_400_BAD_REQUEST

@@ -19,7 +19,7 @@ class RegisterUser(APIView):
         try:
             with transaction.atomic():
                 user = User.objects.create_user(
-                    username = request.data.get("username"),
+                    full_name = request.data.get("full_name"),
                     email = request.data.get("email"),
                     password = request.data.get("password"),
                     user_type = request.data.get("user_type"),

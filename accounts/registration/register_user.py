@@ -30,7 +30,7 @@ def registrations_login(request):
         
         user = authenticate(
             request,
-            username=user_obj.username,
+            email=user_obj.email,
             password=data['password']
         )
 

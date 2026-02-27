@@ -62,7 +62,7 @@ class MakePayment(APIView):
         # -------- Create Payment --------
         with transaction.atomic():
 
-            total_amount = event.ticket_price * quantity
+            total_amount = event.ticket_rate * quantity
 
             payment = Payment.objects.create(
                 user=user,

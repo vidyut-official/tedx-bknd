@@ -9,7 +9,7 @@ from django.db import transaction
 from django.shortcuts import get_object_or_404
 
 from events.models import Event
-from models import Payment
+from ..models import Payment
 from tickets.models import Ticket
 
 

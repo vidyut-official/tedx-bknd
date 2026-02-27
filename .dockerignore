@@ -1,0 +1,50 @@
+# Git
+.git
+.gitignore
+.github
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local environment variables
+.env
+.env.*
+*.env
+
+# SQLite database
+db.sqlite3
+
+# Editor / OS files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Python build artifacts
+build/
+dist/
+*.egg-info/
+
+# Test & coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Logs
+*.log
+
+# Local Docker overrides
+docker-compose.override.yml
+
+# UV cache
+.uv/

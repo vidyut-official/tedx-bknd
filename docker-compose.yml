@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: tedx_db
+    restart: always
+    environment:
+      POSTGRES_DB: tedxPG_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: nandandev/tedx:latest
+    container_name: tedx
+    restart: always
+    command: >
+      sh -c "python manage.py migrate &&
+      gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --threads 2 --worker-tmp-dir /dev/shm"
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+
+volumes:
+  pgdata:

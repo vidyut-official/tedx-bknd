@@ -2,7 +2,6 @@ from django.db import models
 from events.models import Event
 from users.models import User
 
-
 class Payment(models.Model):
 
     STATUS_CHOICES = [

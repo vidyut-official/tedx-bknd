@@ -12,7 +12,7 @@ from events.models import Event
 from ..models import Payment
 from tickets.models import Ticket
 from accounts.permissions import IsRegistration
-
+from users.helpers.get_user_by_id import get_user
 
 class MakePayment(APIView):
 
@@ -20,7 +20,7 @@ class MakePayment(APIView):
 
     def post(self, request):
 
-        user = request.user
+        user = get_user(request.data.get("user_id"))
         event_id = request.data.get("event_id")
         quantity = request.data.get("quantity","1")
         payment_method = request.data.get("payment_method")
@@ -29,6 +29,11 @@ class MakePayment(APIView):
         if not event_id or not quantity:
             return Response(
                 {"error": "event_id and quantity required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        if not user:
+            return Response(
+                {"error": "User not found"},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -43,6 +48,7 @@ class MakePayment(APIView):
             )
 
         event = get_object_or_404(Event, id=event_id)
+        
 
         # -------- Seat Availability Check --------
         sold_tickets = Ticket.objects.filter(event=event).count()
@@ -63,7 +69,8 @@ class MakePayment(APIView):
                 event=event,
                 amount=total_amount,
                 payment_method=payment_method or "inhand",
-                payment_status="pending"
+                payment_status="pending",
+                accepted_by = request.user
             )
 
         return Response(

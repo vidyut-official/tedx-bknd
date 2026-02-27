@@ -11,9 +11,12 @@ from django.shortcuts import get_object_or_404
 from events.models import Event
 from ..models import Payment
 from tickets.models import Ticket
+from accounts.permissions import IsRegistration
 
 
 class MakePayment(APIView):
+
+    permission_classes = [IsRegistration]
 
     def post(self, request):
 

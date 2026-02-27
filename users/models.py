@@ -67,6 +67,7 @@ class User(AbstractUser):
     USER_ROLE = [
         ("registration", "Registration"),
         ("finance", "Finance"),
+        ("admin", "Admin"),
         ("participant", "Participant"),
     ]
 

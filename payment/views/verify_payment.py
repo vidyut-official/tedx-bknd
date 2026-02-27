@@ -9,11 +9,11 @@ from django.db import IntegrityError
 from ..models import Payment
 from tickets.models import Ticket
 from tickets.views.create_tickets import book_ticket
-
+from accounts.permissions import IsAdminUserRole
 
 class VerifyPayment(APIView):
 
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUserRole]
 
     def post(self, request):
 
@@ -40,7 +40,7 @@ class VerifyPayment(APIView):
 
             sold = Ticket.objects.filter(event=payment.event).count()
 
-            if sold >= payment.event.total_seats:
+            if sold >= payment.event.quantity:
                 return Response(
                     {"error": "Event is sold out"},
                     status=status.HTTP_400_BAD_REQUEST

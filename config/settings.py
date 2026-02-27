@@ -23,11 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-2=ec@*v*m)bhvnkjcg3n*v@$2np%ms$_i+_7-2m=ya#s6wya@7'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]  # tighten in production
+ALLOWED_HOSTS = ["apitedx.amrita.edu.in"]  # tighten in production
 # Application definition
 
 INSTALLED_APPS = [

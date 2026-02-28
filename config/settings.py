@@ -37,7 +37,7 @@ AZURE_REDIRECT_URI = "https://apitedx.amrita.edu.in/api/v1/auth/azure/callback/"
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["apitedx.amrita.edu.in"]  # tighten in production
 # Application definition

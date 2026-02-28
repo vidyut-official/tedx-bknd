@@ -1,3 +1,5 @@
+from unittest import result
+
 from django.http import JsonResponse
 from django.db import transaction
 from django.shortcuts import redirect
@@ -25,11 +27,15 @@ def azure_callback(request):
         redirect_uri=settings.AZURE_REDIRECT_URI,
     )
 
-    # Ensure authentication succeeded
-    if "id_token_claims" not in result:
-        return JsonResponse({"error": "Authentication failed"}, status=400)
+    if "error" in result:
+        return JsonResponse({
+            "error": result.get("error"),
+            "description": result.get("error_description"),
+        }, status=400)
 
-    claims = result["id_token_claims"]
+    claims = result.get("id_token_claims")
+    if not claims:
+        return JsonResponse({"error": "No ID token received"}, status=400)
 
     if claims.get("tid") != settings.AZURE_TENANT_ID:
         return JsonResponse({"error": "Unauthorized tenant"}, status=403)
@@ -38,10 +44,8 @@ def azure_callback(request):
 
     if not email:
         return JsonResponse({"error": "Email not found in token"}, status=400)
-    
+
     if not email.endswith("@am.students.amrita.edu"):
         return JsonResponse({"error": "Unauthorized email domain"}, status=403)
 
-    # Extract roll number
-    
     return JsonResponse({"response": "authentication success"}, status=200)

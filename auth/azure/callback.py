@@ -21,7 +21,7 @@ def azure_callback(request):
 
     result = app.acquire_token_by_authorization_code(
         code,
-        scopes=["openid", "profile", "email", "User.Read"],
+        scopes=["User.Read"],
         redirect_uri=settings.AZURE_REDIRECT_URI,
     )
 

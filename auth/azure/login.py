@@ -11,9 +11,8 @@ def azure_login(request):
     )
 
     auth_url = app.get_authorization_request_url(
-        scopes=["User.Read"],
+        scopes=["openid", "profile", "email", "User.Read"],
         redirect_uri=settings.AZURE_REDIRECT_URI,
-
     )
 
     return redirect(auth_url)
